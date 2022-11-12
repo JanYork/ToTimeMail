@@ -1,0 +1,177 @@
+body {
+    background-color: #EBF5FF !important;
+}
+
+#Email-BigBox {
+    min-width: 600px;
+    max-width: 60%;
+    margin: 20px auto 0 auto;
+    background-color: #FFFFFF;
+    /* 圆角 */
+    border-radius: 15px;
+    display: flex;
+}
+
+#Email-BigBox .Principal-left {
+    width: 35%;
+    background-color: #F5FCFA;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+#Email-BigBox .Principal-right {
+    width: 70%;
+    height: 100%;
+    background-color: #FFFFFF;
+    padding: 20px 0;
+    border-radius: 0 15px 15px 0;
+}
+
+.Principal-right .right-title {
+    font-size: 25px;
+    color: #000000 !important;
+    font-family: "幼圆";
+    /* 居中 */
+    text-align: center;
+    margin-top: 10px;
+}
+
+.Principal-right .title-p {
+    font-size: 10px;
+    color: #000000 !important;
+    /* 居中 */
+    text-align: center;
+    margin-top: 10px;
+}
+
+.Principal-left .text-p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.5rem;
+    font-weight: bold;
+    color: #000000 !important;
+}
+
+.Principal-left .logo-box img {
+    width: 225px;
+    margin: 25px auto;
+}
+
+.statistics-box {
+    margin-top: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.statistics-box .statistics-img {
+    width: 25px;
+    display: inline-block;
+}
+
+.statistics-box .statistics-text {
+    display: flex;
+    align-items: center;
+    font-size: 0.5rem;
+    font-weight: bold;
+    margin: 15px 0;
+    color: #000000 !important;
+}
+
+.statistics-box .statistics-desc {
+    margin: 0 0 0 0.8rem;
+    color: #5B9CFC;
+}
+
+.statistics-box .statistics-number {
+    margin: 0 0.8rem;
+    color: #F46317;
+}
+
+.statistics-box .statistics-unit {
+    color: #5B9CFC;
+}
+
+.gzh-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 128px;
+}
+
+.gzh-box .gzh-img {
+    width: 130px;
+    margin: 10px 0;
+}
+
+.gzh-box p {
+    font-size: 0.5rem;
+    font-weight: bold;
+    color: #000000 !important;
+}
+
+.from-email {
+    margin-top: 30px;
+}
+
+.from-email .email-info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 80%;
+}
+
+.email-info .span-desc {
+    min-width: 100px;
+    color: #000000 !important;
+    
+}
+
+.email-info{
+    margin-top: 30px !important;
+}
+
+.email-but-action{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 45px 0 30px 0 !important;
+}
+
+.email-but-action .el-button{
+    margin: 0 30px !important;
+    width: 200px !important;
+}
+
+.treaty-text{
+    margin-left: 10px;
+    color: #000000;
+}
+
+.treaty-text a{
+    color: #5B9CFC;
+}
+
+.email-vditor{
+    align-items: flex-start !important;
+}
+
+/* Vditor样式覆盖 */
+.vditor-toolbar{
+    padding: 0 9px !important;
+}
+
+/* element-plus css覆盖 */
+:root {
+    --el-border-color: transparent !important;
+}
+
+.el-input__wrapper:hover,.el-textarea__inner:hover {
+    box-shadow: 0 0 0 0 !important;
+}
+
+.el-input,.el-textarea {
+    --el-input-focus-border-color: transparent !important;
+    --el-input-bg-color: #F6F6F6 !important;
+}

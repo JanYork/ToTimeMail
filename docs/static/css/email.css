@@ -157,6 +157,30 @@ body {
     align-items: flex-start !important;
 }
 
+#ArticleMasking{
+    background-color: rgba(0, 0, 0, 0.3);
+    /* 覆盖整个页面 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+#ArticleMasking #Article{
+    max-width: 700px;
+    min-width: 500px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+    margin: 20px 20px;
+}
+
 /* Vditor样式覆盖 */
 .vditor-toolbar{
     padding: 0 9px !important;
@@ -174,4 +198,33 @@ body {
 .el-input,.el-textarea {
     --el-input-focus-border-color: transparent !important;
     --el-input-bg-color: #F6F6F6 !important;
+}
+
+/* 全局美化滚动条 */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    width: 6px;
+    background: rgba(#101F1C, 0.1);
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(144, 147, 153, .5);
+    background-clip: padding-box;
+    min-height: 28px;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+    transition: background-color .3s;
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(144, 147, 153, .3);
 }

@@ -9,7 +9,7 @@
 //导入request
 import request from './request'
 
-function get(url:string, params: any) {
+async function get(url:string, params: any) {
     return request({
         url: url,
         method: 'get',
@@ -17,7 +17,7 @@ function get(url:string, params: any) {
     })
 }
 
-function post(url:string, params: any) {
+async function post(url:string, params: any) {
     return request({
         url: url,
         method: 'post',

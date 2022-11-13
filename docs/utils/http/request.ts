@@ -5,8 +5,9 @@ import qs from 'qs'
 
 //创建axios实例
 const service = axios.create({
-    baseURL: "http://127.0.0.1:8899/", // api的base_url
-    timeout: 3000 // 请求超时时间
+    baseURL: "https://times.sady0.com/", // api的base_url
+    // 请求超时时间,延时请求原因注释掉
+    // timeout: 3000
 })
 
 // request拦截器

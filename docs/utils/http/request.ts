@@ -2,10 +2,11 @@
 import axios from 'axios'
 //导入QS
 import qs from 'qs'
+import ToTimeConfig from '../../config/toTime.config'
 
 //创建axios实例
 const service = axios.create({
-    baseURL: "https://times.sady0.com/", // api的base_url
+    baseURL: ToTimeConfig.baseURL,
     // 请求超时时间,延时请求原因注释掉
     // timeout: 3000
 })

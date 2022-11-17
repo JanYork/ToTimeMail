@@ -64,7 +64,6 @@
 
         <div class="email-info">
           <span class="span-desc">收件信息：</span>
-          <!-- TODO: 收件信息 -->
           <el-input class="title-el-input" v-model="data.form.addressee" placeholder="姓名" style="width: 30%"
                     :disabled="data.isDisabled"/>
           <el-input class="title-el-input" v-model="data.form.phone" placeholder="手机号"
@@ -84,7 +83,6 @@
                     :disabled="data.isDisabled"/>
         </div>
 
-        <!-- TODO: 腾讯云COS回显 -->
         <div class="email-info email-vditor">
           <span class="span-desc">信件内容：</span>
           <div class="title-el-input" id="vditor"></div>
@@ -107,14 +105,24 @@
 
         <div class="email-info">
           <span class="span-desc">写给他人：</span>
-          <el-switch style="--el-switch-on-color: #13ce66; --el-switch-off-color: #bebbbb"
-                     v-model="data.form.isTa" inline-prompt active-text="是" inactive-text="否"/>
+          <el-switch
+              style="--el-switch-on-color: #13ce66; --el-switch-off-color: #bebbbb"
+              v-model="data.form.isTa" inline-prompt active-text="是" inactive-text="否"
+              :active-value="0" :inactive-value="1"
+          />
+        </div>
+
+        <div class="email-info">
+          <span class="span-desc">是否公开：</span>
+          <el-switch
+              style="--el-switch-on-color: #13ce66; --el-switch-off-color: #bebbbb"
+              v-model="data.form.isPublic" inline-prompt active-text="是" inactive-text="否"
+              :active-value="0" :inactive-value="1"/>
         </div>
 
         <div class="email-info">
           <span class="span-desc">收信邮箱：</span>
-
-          <el-input class="title-el-input" v-model="data.form.toEmail[0]" placeholder="收信邮箱"
+          <el-input class="title-el-input" v-model="data.form.toEmail" placeholder="收信邮箱"
                     style="width: 50%"/>
         </div>
 
@@ -166,7 +174,7 @@ const emailOptions = [
   {value: 1, label: "线下邮寄"},
 ];
 
-var vditor;
+let vditor;
 let editor;
 onMounted(() => {
   vditor = ref(
@@ -213,7 +221,7 @@ onMounted(() => {
           url: ToTimeConfig.uploadURL,
           linkToImgUrl: ToTimeConfig.linkURL,
           filename(byte) {
-            return byte.replace(/[^(a-zA-Z0-9\u4e00-\u9fa5\.)]/g, '').replace(/[\?\\/:|<>\*\[\]\(\)\$%\{\}@~]/g, '').replace('/\\s/g', '')
+            return byte.replace(/[^(a-zA-Z0-9\u4e00-\u9fa5.)]/g, '').replace(/[?\\/:|<>*\[\]()$%{}@~]/g, '').replace('/\\s/g', '')
           },
           fieldName: 'file',
           multiple: false,
@@ -221,7 +229,7 @@ onMounted(() => {
           max: 1024 * 1024 * 5,
           success(_, msg) {
             let info = JSON.parse(msg);
-            if (info.code == 200) {
+            if (info.code === 200) {
               //编辑器回显
               editor.insertValue(`![](${info.imgUrl})`)
             } else {
@@ -251,25 +259,34 @@ const data = reactive({
     type: 0,
     //获取现在时间
     dataTime: new Date(),
-    isTa: false,
-    toEmail: [""],
+    isTa: 1,
+    toEmail: "",
     addressee: "",
     phone: "",
     content: "",
-    isHtml: true,
+    contentHtml: "",
+    isHtml: 0,
+    isPublic: 1,
+    isAbandon: 1,
+    address: "",
   },
 });
 
 watch(
     () => data.form.type,
     (val) => {
-      if (val == 1) {
-        data.isDisabled = false;
-      } else {
-        data.isDisabled = true;
-      }
-    }
+      data.isDisabled = val !== 1;
+    },
+    { deep: true }
 );
+watch(
+    () => [data.addressSpecific, data.addressDetailed],
+    (val) => {
+      data.form.address = val[0] + val[1];
+    },
+    { deep: true }
+);
+
 const holidays = [
   "2021-10-01",
   "2021-10-02",
@@ -308,29 +325,30 @@ const getSnapshot = () => {
 const deliveryEmail = async () => {
   //获取撰写内容
   data.form.content = vditor.value.getValue();
+  data.form.contentHtml = vditor.value.getHTML();
 
-  if (data.form.title == "") {
+  if (data.form.title === "") {
     ElMessage({
       message: "请输入标题",
       type: "error",
     });
     return;
   }
-  if (data.form.content == "") {
+  if (data.form.content === "") {
     ElMessage({
       message: "请输入内容",
       type: "error",
     });
     return;
   }
-  if (data.form.toEmail[1] == "") {
+  if (data.form.toEmail === "") {
     ElMessage({
       message: "请输入收信邮箱",
       type: "error",
     });
     return;
   }
-  if (data.isAgreeTerms == false) {
+  if (data.isAgreeTerms === false) {
     ElMessage({
       message: "请同意条款",
       type: "error",
@@ -338,29 +356,29 @@ const deliveryEmail = async () => {
     return;
   }
 
-  if (data.form.type == 1) {
-    if (data.form.addressee == "") {
+  if (data.form.type === 1) {
+    if (data.form.addressee === "") {
       ElMessage({
         message: "请输入收件人",
         type: "error",
       });
       return;
     }
-    if (data.form.phone == "") {
+    if (data.form.phone === "") {
       ElMessage({
         message: "请输入电话",
         type: "error",
       });
       return;
     }
-    if (data.addressDetailed == "") {
+    if (data.addressDetailed === "") {
       ElMessage({
         message: "请输入详细地址",
         type: "error",
       });
       return;
     }
-    if (data.addressSpecific == "") {
+    if (data.addressSpecific === "") {
       ElMessage({
         message: "请输入具体地址",
         type: "error",
@@ -387,7 +405,7 @@ const deliveryEmail = async () => {
   }
 
   //匹配邮箱
-  if (!/^([.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$/.test(data.form.toEmail[0])) {
+  if (!/^([.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$/.test(data.form.toEmail)) {
     ElMessage({
       message: "请输入正确的邮箱",
       type: "error",
@@ -396,7 +414,7 @@ const deliveryEmail = async () => {
   }
 
   //渲染
-  Vditor.preview(document.getElementById("Article"), vditor.value.getValue(), {
+  await Vditor.preview(document.getElementById("Article"), vditor.value.getValue(), {
     mode: "dark",
     hljs: {
       style: "github-dark",
@@ -418,9 +436,11 @@ const deliveryEmail = async () => {
 
   getSnapshot();
 
-  await http.post("/sendEmail/toTimeMsg", data.form).then((res) => {
-    if (res.data.code == 200) {
+  await http.post("/timeMail/add", data.form).then((res) => {
+    if (res.data.code === 200) {
       setTimeout(() => {
+        data.isMasking = false;
+        data.isFilter = '';
         loading.close();
         ElNotification({
           title: "成功",
@@ -428,10 +448,10 @@ const deliveryEmail = async () => {
           type: "success",
         });
       }, 2000);
-      data.isMasking = false;
-      data.isFilter = '';
     } else {
       setTimeout(() => {
+        data.isMasking = false;
+        data.isFilter = '';
         loading.close();
         ElNotification({
           title: "失败",
@@ -440,15 +460,13 @@ const deliveryEmail = async () => {
           duration: 3000,
         });
       }, 2000);
-      data.isMasking = false;
-      data.isFilter = '';
     }
   });
 };
 
 // 舍弃信件
 const discardEmail = () => {
-  //刷新页面 TODO: 优化，使用弹出提示
+  //刷新页面 TODO: 优化，使用弹出提示,存储快照
   window.location.reload();
 };
 </script>

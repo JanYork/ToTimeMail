@@ -13,13 +13,15 @@ const service = axios.create({
 
 // request拦截器
 service.interceptors.request.use(config => {
-    // Do something before request is sent
-    // if (config.method === 'post') {
-    //     config.data = qs.stringify(config.data)
-    // }
+    //如果是get请求，则使用qs.stringify()转换参数
+    if (config.method === 'get') {
+        config.params = config.params || {}
+        config.params = qs.stringify(config.params)
+    }
     return config
 }, error => {
     // Do something with request error
+    // @ts-ignore
     return Promise.reject(error)
     // Do something with request error
     // return Promise.reject(error)
@@ -33,6 +35,7 @@ service.interceptors.response.use(
     },
     error => {
         // Do something with response error
+        // @ts-ignore
         return Promise.reject(error)
         // Do something with response error
         // return Promise.reject(error)

@@ -1,0 +1,53 @@
+#h_img_logo {
+    width: 13rem;
+    /*  定位右上角  */
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    transform: translate(35%, -35%);
+}
+
+.time_top_box {
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: "幼圆", serif;
+    margin-top: 8rem;
+    margin-left: 1.5rem;
+}
+
+.time_top_box h1{
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.time_context{
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    background-color: #f5f5f5;
+    border-radius: 1rem 1rem 0 0;
+    margin-top: 1.5rem;
+    padding: 1rem;
+}
+
+.time_context_top{
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    font-family: "幼圆", serif;
+}
+
+.time_context_top .timeText{
+    position: relative;
+    right: -100px;
+}
+
+.time_context_info{
+    margin-top: 1rem;
+}

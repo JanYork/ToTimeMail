@@ -2,6 +2,13 @@
 layout: home
 ---
 <script setup>
-import EmailPage from './page/Email.vue'
+import isMobile from './utils/isMobile.ts';
+import PagePc from './page/Email.vue';
+import {onMounted} from 'vue';
+onMounted(()=>{
+    if (isMobile()  && window.innerWidth <= 768) {
+        window.location.href = '/toemailh.html';
+    }
+});
 </script>
-<EmailPage></EmailPage>
+<PagePc></PagePc>

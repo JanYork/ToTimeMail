@@ -149,7 +149,6 @@
 
 <script setup>
 import http from "../utils/http/http";
-import "../static/css/email.css";
 import {reactive, watch, onMounted, ref} from "vue";
 import {
   ElInput,
@@ -167,7 +166,7 @@ import "element-plus/dist/index.css";
 import Vditor from "vditor";
 import "vditor/dist/index.css";
 import html2canvas from "html2canvas";
-import ToTimeConfig from "../config/toTime.config";
+import ToTimeConfig from "../config/ToTime.config";
 
 const emailOptions = [
   {value: 0, label: "电子邮件"},
@@ -470,3 +469,7 @@ const discardEmail = () => {
   window.location.reload();
 };
 </script>
+
+<style scoped>
+@import url("../static/css/email.css");
+</style>

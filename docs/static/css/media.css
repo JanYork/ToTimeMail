@@ -1,0 +1,8 @@
+@media screen and (max-width: 768px) {
+    body{
+        background-color: #3F93FF !important;
+    }
+    .VPFooter,.VPNav,textarea{
+        display: none !important;
+    }
+}

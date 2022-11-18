@@ -2,7 +2,7 @@
 import axios from 'axios'
 //导入QS
 import qs from 'qs'
-import ToTimeConfig from '../../config/toTime.config'
+import ToTimeConfig from '../../config/ToTime.config'
 
 //创建axios实例
 const service = axios.create({

@@ -10,10 +10,13 @@ hero:
     alt: 云寄 • 邮局
   actions:
     - theme: brand
-      text: 📫 写信
+      text: 📫 电脑写信
       link: /toemail
+    - theme: brand
+      text: 📱 手机写信
+      link: /toemailh
     - theme: alt
-      text: 📄 关于
+      text: 📄 关于我们
       link: /concerning
 features:
   - icon: ⚡️

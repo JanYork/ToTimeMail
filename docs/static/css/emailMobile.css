@@ -1,13 +1,3 @@
-#h_img_logo {
-    width: 13rem;
-    /*  定位右上角  */
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 2;
-    transform: translate(35%, -35%);
-}
-
 .time_top_box {
     color: white;
     font-size: 1rem;
@@ -17,20 +7,32 @@
     margin-left: 1.5rem;
 }
 
+.back_logo{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8rem;
+}
+
 .time_top_box h1{
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
 
-.time_context{
+#container{
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
-    min-height: 500px;
-    background-color: #f5f5f5;
+}
+.time_context{
+    width: 100%;
+    background-color: white;
     border-radius: 1rem 1rem 0 0;
     margin-top: 1.5rem;
     padding: 1rem;
+    flex-shrink: 0;
 }
 
 .time_context_top{
@@ -50,4 +52,24 @@
 
 .time_context_info{
     margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.button_box{
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button_box .but{
+    margin: 0 2rem;
+    border-radius: 0.5rem;
+    width: 8rem;
+}
+
+#Masking{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

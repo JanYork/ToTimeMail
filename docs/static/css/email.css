@@ -181,6 +181,18 @@ body {
     margin: 20px 20px;
 }
 
+.get_code{
+    font-size: 13px;
+    margin-left: 10px;
+    color: #5B9CFC;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.get_code:hover{
+    color: #418aed;
+}
+
 /* Vditor样式覆盖 */
 .vditor-toolbar{
     padding: 0 9px !important;

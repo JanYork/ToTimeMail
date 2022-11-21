@@ -1,8 +1,14 @@
 @media screen and (max-width: 768px) {
-    body{
+    #container{
         background-color: #3F93FF !important;
     }
-    .VPFooter,.VPNav,textarea{
-        display: none !important;
+    /*.VPFooter,.VPNav,textarea{*/
+    /*    display: none !important;*/
+    /*}*/
+    .VPHome{
+        padding-bottom: 0 !important;
+    }
+    .Layout{
+        min-height: auto !important;
     }
 }

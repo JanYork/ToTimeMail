@@ -126,6 +126,20 @@
                     style="width: 50%"/>
         </div>
 
+        <div class="email-info"  v-show="data.form.isTa == 0">
+          <span class="span-desc">收验邮箱：</span>
+          <el-input class="title-el-input" v-model="data.form.codeMail" placeholder="验证邮箱"
+                    style="width: 50%"/>
+        </div>
+
+        <div class="email-info">
+          <span class="span-desc">校验密钥：</span>
+          <el-input class="title-el-input" v-model="data.form.code" placeholder="输入验证"
+                    style="width: 50%">
+          </el-input>
+          <span @click="getCode" class="get_code" v-show="data.showCode">{{ data.getCode }}</span>
+        </div>
+
         <div class="email-info">
           <span class="span-desc">同意条款：</span>
           <el-switch style="--el-switch-on-color: #13ce66; --el-switch-off-color: #bebbbb"
@@ -167,11 +181,32 @@ import Vditor from "vditor";
 import "vditor/dist/index.css";
 import html2canvas from "html2canvas";
 import ToTimeConfig from "../config/ToTime.config";
+import Notify from "vant/es/notify";
 
 const emailOptions = [
   {value: 0, label: "电子邮件"},
   {value: 1, label: "线下邮寄"},
 ];
+
+//进入页面检查是否为镜像
+onMounted(() => {
+  if (ToTimeConfig.isCopy) {
+    ElMessageBox.confirm(
+        '此为云寄镜像站点，是否跳转到官方站点？',
+        {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+        }
+    )
+        .then(() => {
+          //跳转到原网站
+          window.location.href = ToTimeConfig.official;
+        })
+        .catch(() => {
+          console.log("取消跳转");
+        })
+  }
+})
 
 let vditor;
 let editor;
@@ -244,6 +279,7 @@ onMounted(() => {
 const data = reactive({
   isMasking: false,
   isDisabled: true,
+  showCode: false,
   waitSend: 52,
   send: 15,
   operation: 15,
@@ -251,6 +287,7 @@ const data = reactive({
   addressDetailed: "",
   addressSpecific: "",
   loadingText: "正在保存快照...",
+  getCode: "获取验证",
   isFilter: "",
   form: {
     title: "",
@@ -268,6 +305,8 @@ const data = reactive({
     isPublic: 1,
     isAbandon: 1,
     address: "",
+    code: "",
+    codeMail: "",
   },
 });
 
@@ -276,14 +315,28 @@ watch(
     (val) => {
       data.isDisabled = val !== 1;
     },
-    { deep: true }
+    {deep: true}
 );
 watch(
     () => [data.addressSpecific, data.addressDetailed],
     (val) => {
       data.form.address = val[0] + val[1];
     },
-    { deep: true }
+    {deep: true}
+);
+
+watch(
+    () => data.form.toEmail,
+    (val) => {
+      if (val) {
+        if (!/^([.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$/.test(data.form.toEmail)) {
+          data.showCode = false;
+        } else {
+          data.showCode = true;
+        }
+      }
+    },
+    {deep: true}
 );
 
 const holidays = [
@@ -319,6 +372,42 @@ const getSnapshot = () => {
   }, 2000);
 };
 
+const getCode = async () => {
+  let codeEmail;
+  if (data.form.isTa == 0){
+    codeEmail = data.form.codeMail;
+  }else {
+    codeEmail = data.form.toEmail;
+  }
+  if (codeEmail === '') {
+    ElMessage.error('请输入邮箱');
+    return;
+  }
+  //匹配邮箱
+  if (!/^([.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$/.test(codeEmail)) {
+    ElMessage.error('邮箱格式不正确');
+    return;
+  }
+  http.get('/code/get', {
+    email: codeEmail
+  }).then(res => {
+    if (res.data.code === 200) {
+      ElMessage.success('验证码已发送');
+      //开始倒计时
+      let time = 120;
+      let timer = setInterval(() => {
+        time--;
+        data.getCode = time + 's';
+        if (time === 0) {
+          clearInterval(timer);
+          data.getCode = '获取验证码';
+        }
+      }, 1000);
+    } else {
+      ElMessage.error(res.data.msg);
+    }
+  });
+};
 
 // 投递信件
 const deliveryEmail = async () => {
@@ -326,28 +415,28 @@ const deliveryEmail = async () => {
   data.form.content = vditor.value.getValue();
   data.form.contentHtml = vditor.value.getHTML();
 
-  if (data.form.title === "") {
+  if (data.form.title == "") {
     ElMessage({
       message: "请输入标题",
       type: "error",
     });
     return;
   }
-  if (data.form.content === "") {
+  if (data.form.content == "") {
     ElMessage({
       message: "请输入内容",
       type: "error",
     });
     return;
   }
-  if (data.form.toEmail === "") {
+  if (data.form.toEmail == "") {
     ElMessage({
       message: "请输入收信邮箱",
       type: "error",
     });
     return;
   }
-  if (data.isAgreeTerms === false) {
+  if (data.isAgreeTerms == false) {
     ElMessage({
       message: "请同意条款",
       type: "error",
@@ -356,28 +445,28 @@ const deliveryEmail = async () => {
   }
 
   if (data.form.type === 1) {
-    if (data.form.addressee === "") {
+    if (data.form.addressee == "") {
       ElMessage({
         message: "请输入收件人",
         type: "error",
       });
       return;
     }
-    if (data.form.phone === "") {
+    if (data.form.phone == "") {
       ElMessage({
         message: "请输入电话",
         type: "error",
       });
       return;
     }
-    if (data.addressDetailed === "") {
+    if (data.addressDetailed == "") {
       ElMessage({
         message: "请输入详细地址",
         type: "error",
       });
       return;
     }
-    if (data.addressSpecific === "") {
+    if (data.addressSpecific == "") {
       ElMessage({
         message: "请输入具体地址",
         type: "error",

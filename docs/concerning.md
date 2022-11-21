@@ -2,10 +2,11 @@
 
 ## 关于团队
 
-- 本站由 与时同行官方 运营
+- 本站由 与时同行官方 运营，由云寄团队维护
 - 在这个信件寄送出的信是不可撤回的，希望你忘掉这件事，直到收到信的那一天。
-- 管理员服务邮箱/QQ：admin@chuqis.com
-- 官方地址([https://www.totime.cn](https://www.totime.cn/))
+- 开发者信息：小简QQ ==> 747945307，小简邮箱 ==> [747945307@qq.com](mailto:747945307@qq.com)
+- 管理员服务邮箱/QQ：[timestore@totime.cn](mailto:timestore@totime.cn)（我们悉心听取您的意见，感谢）
+- 官方地址([https://mail.totime.cn](https://mail.totime.cn/))
 
 - 官方公众号 “与时同行”
 

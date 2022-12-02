@@ -13,9 +13,9 @@ import { defineConfig } from "vitepress";
 // }
 export default defineConfig({
   lang: "zh-CN",
-  title: "云寄•时光邮局",
-  description: "云寄•时光邮局时与时同行旗下的产品，是一个专注于时光邮件的产品，支持给未来的自己发送电子邮件或者实体信件，致力于打造一个懂得记录的时光邮件服务，多关注生活点滴。",
-  titleTemplate: "与时同行旗下时光邮局公益项目",
+  title: "时光邮局",
+  description: "云寄-时光邮局时与时同行旗下的产品，是一个专注于时光邮件的产品，支持给未来的自己发送电子邮件或者实体信件，致力于打造一个懂得记录的时光邮件服务，多关注生活点滴。",
+  titleTemplate: "给未来的你或者她写一封跨越时空的书信",
   themeConfig: {
     siteTitle: "云寄•时光邮局",
     footer: {
@@ -42,14 +42,14 @@ export default defineConfig({
       // { text: "RSS",link: "https://mail.totime.cn/map/sitemap.rss" },
 
       // { text: "官方站点",link: "https://mail.totime.cn" },
-      { text: "关于项目",link: "/concerning.html" },
-      { text: "隐私政策",link: "/PrivacyPolicy.html" },
+      { text: "关于项目",link: "https://mail.totime.cn/concerning.html" },
+      { text: "隐私政策",link: "https://mail.totime.cn/PrivacyPolicy.html" },
     ],
   },
 
   head: [
     ["link", { rel: "icon", href: "/logo.png" }],
-    ["meta", { name: "keywords", content: "与时同行,时光邮局,云寄,云寄时光邮局,时光信件,时光胶囊" }],
+    ["meta", { name: "keywords", content: "时光邮局,与时同行,时光邮局,云寄,云寄时光邮局,时光信件,时光胶囊" }],
     ["link", { rel: "stylesheet", href: "https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vant/4.0.0-alpha.0/index.min.css" }],
   ],
   vite: {

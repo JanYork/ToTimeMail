@@ -17,6 +17,9 @@ body {
     background-color: #F5FCFA;
     border-radius: 15px;
     padding: 10px;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+    animation-name: fadeInLeft;
 }
 
 #Email-BigBox .Principal-right {
@@ -25,6 +28,9 @@ body {
     background-color: #FFFFFF;
     padding: 20px 0;
     border-radius: 0 15px 15px 0;
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+    animation-name: fadeInRight;
 }
 
 .Principal-right .right-title {
@@ -212,31 +218,14 @@ body {
     --el-input-bg-color: #F6F6F6 !important;
 }
 
-/* 全局美化滚动条 */
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+.logo-box{
+    animation-duration: 3.5s;
+    animation-fill-mode: both;
+    animation-name: fadeIn;
 }
 
-::-webkit-scrollbar-track {
-    width: 6px;
-    background: rgba(#101F1C, 0.1);
-    -webkit-border-radius: 2em;
-    -moz-border-radius: 2em;
-    border-radius: 2em;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: rgba(144, 147, 153, .5);
-    background-clip: padding-box;
-    min-height: 28px;
-    -webkit-border-radius: 2em;
-    -moz-border-radius: 2em;
-    border-radius: 2em;
-    transition: background-color .3s;
-    cursor: pointer;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(144, 147, 153, .3);
+.Principal-right > .right-title , .Principal-right > .title-p{
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-name: fadeInDown;
 }

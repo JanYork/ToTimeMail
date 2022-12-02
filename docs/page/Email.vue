@@ -91,6 +91,7 @@
         <div class="email-info">
           <span class="span-desc">约定时间：</span>
           <div class="demo-date-picker">
+            <client-only>
             <el-date-picker v-model="data.form.dataTime" type="date" placeholder="选择未来" format="YYYY-MM-DD"
                             value-format="YYYY-MM-DD">
               <template #default="cell">
@@ -100,6 +101,7 @@
                 </div>
               </template>
             </el-date-picker>
+            </client-only>
           </div>
         </div>
 
@@ -126,7 +128,7 @@
                     style="width: 50%"/>
         </div>
 
-        <div class="email-info"  v-show="data.form.isTa == 0">
+        <div class="email-info animate__animated animate__fadeIn"  v-show="data.form.isTa == 0">
           <span class="span-desc">收验邮箱：</span>
           <el-input class="title-el-input" v-model="data.form.codeMail" placeholder="验证邮箱"
                     style="width: 50%"/>
@@ -163,6 +165,7 @@
 
 <script setup>
 import http from "../utils/http/http";
+import 'animate.css';
 import {reactive, watch, onMounted, ref} from "vue";
 import {
   ElInput,
@@ -181,7 +184,6 @@ import Vditor from "vditor";
 import "vditor/dist/index.css";
 import html2canvas from "html2canvas";
 import ToTimeConfig from "../config/ToTime.config";
-import Notify from "vant/es/notify";
 
 const emailOptions = [
   {value: 0, label: "电子邮件"},

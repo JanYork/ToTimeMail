@@ -31,4 +31,52 @@ features:
 ---
 
 <script setup>
+import 'animate.css'
 </script>
+<style type="text/css"> 
+.VPHome .VPFeatures {
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-name: slideInUp;
+}
+.name,.text{
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+    animation-name: flipInX;
+}
+.tagline{
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-name: fadeInTopLeft;
+}
+
+.actions{
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-name: lightSpeedInLeft;
+}
+.image{
+    animation-duration: 3s;
+    animation-fill-mode: both;
+    animation-name: fadeInRight;
+}
+@media screen and (max-width: 768px) {
+    .image{
+        animation-name: fadeIn !important;
+    }
+    .tagline{
+        animation-duration: 2s;
+        animation-name: bounceIn !important;
+    }
+    .actions{
+        animation-duration: 1s;
+        animation-name: flipInX !important;
+    }
+}
+
+.title{
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-name: wobble;
+}
+</style>

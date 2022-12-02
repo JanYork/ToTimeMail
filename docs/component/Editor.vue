@@ -16,7 +16,7 @@ let editor;
 onMounted(() => {
   vditor = ref(
       editor = new Vditor("vditor", {
-        height: 360,
+        height: "100%",
         toolbar: [
           "emoji",
           "headings",

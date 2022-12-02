@@ -39,16 +39,15 @@
               v-model="data.addressArea"
           />
 
-          <Popup v-model:show="data.showArea" position="bottom">
-            <Area
-                :area-list="data.area"
-                @confirm="onConfirmArea"
-                @cancel="data.showArea = false"
-                :columns-num=3
-                :columns-placeholder="['请选择', '请选择', '请选择']"
-            />
+          <Popup v-model:show="data.showArea" position="bottom" :style="{ height: '85%' }">
+              <Area
+                  :area-list="data.area"
+                  @confirm="onConfirmArea"
+                  @cancel="data.showArea = false"
+                  :columns-num=3
+                  :columns-placeholder="['请选择', '请选择', '请选择']"
+              />
           </Popup>
-
           <Field
               v-model="data.addressDetailed"
               label="详细地址"
@@ -100,7 +99,8 @@
             </template>
           </Field>
 
-          <Field v-model="data.form.codeMail" label="收验邮箱" placeholder="验证邮箱" v-show="data.form.isTa == 0"/>
+          <Field class="__code_email" v-model="data.form.codeMail" label="收验邮箱" placeholder="验证邮箱"
+                 v-show="data.form.isTa == 0"/>
 
 
           <Field v-model="data.form.toEmail" label="收件邮箱" :placeholder="data.emailPlaceholder"/>
@@ -113,7 +113,7 @@
               placeholder="请输入验证码"
           >
             <template #button>
-              <span id="getCode" @click="getCode">{{ data.getCode }}</span>
+              <span id="getCode" @click="getCode" :style="data.spanColor">{{ data.getCode }}</span>
             </template>
           </Field>
 
@@ -138,6 +138,21 @@
           <Button class="but" type="default" @click="outEmail">放弃信件</Button>
         </div>
       </div>
+
+      <Popup
+          v-model:show="data.isQQbrw"
+          closeable
+          close-icon="close"
+          position="bottom"
+          :style="{ height: '50%' }"
+      >
+        <div class="qq_box">
+          <img src="../static/ico/timelogo.png" alt="logo">
+          <h2 class="qq_title">云寄•时光邮局</h2>
+          <p>云寄检测到为您目前为QQ内置浏览器</p>
+          <p>为了更好的体验，请使用外置浏览器</p>
+        </div>
+      </Popup>
     </div>
   </div>
 
@@ -166,6 +181,8 @@ import Overlay from 'vant/es/overlay/index';
 import Toast from 'vant/es/toast/index';
 import Dialog from 'vant/es/dialog/index';
 import Vditor from "vditor";
+import getUA from "../utils/getUA"
+import 'animate.css';
 
 
 import {areaList} from '@vant/area-data';
@@ -180,6 +197,7 @@ const data = reactive({
   showArea: false,
   dataShow: false,
   showTextBoxUp: false,
+  isQQbrw: false,
   emailPlaceholder: '收信邮箱',
   isAgreeTerms: 1,
   isMasking: false,
@@ -188,6 +206,7 @@ const data = reactive({
   addressDetailed: '',
   addressArea: '',
   date: '',
+  spanColor: 'color: #418aed;',
   minDate: new Date(),
   maxDate: new Date(2099, 12, 31),
   form: {
@@ -248,6 +267,11 @@ onMounted(() => {
     }).catch(() => {
       console.log('取消跳转');
     });
+  }
+  if (getUA().QQbrw) {
+    setTimeout(() => {
+      data.isQQbrw = true;
+    }, 1000);
   }
 });
 
@@ -345,7 +369,7 @@ const outEmail = async () => {
       //刷新
       window.location.reload();
     });
-  }else{
+  } else {
     Dialog.confirm({
       message: '确定要放弃这封信吗？有什么心事可以和小简说哟~，有时间可以聊天哦~',
     }).then(() => {
@@ -368,9 +392,9 @@ const onConfirmData = (values) => {
 
 const getCode = async () => {
   let codeEmail;
-  if (data.form.isTa == 0){
+  if (data.form.isTa == 0) {
     codeEmail = data.form.codeMail;
-  }else {
+  } else {
     codeEmail = data.form.toEmail;
   }
   if (codeEmail === '') {
@@ -386,6 +410,7 @@ const getCode = async () => {
     email: codeEmail,
   }).then(res => {
     if (res.data.code === 200) {
+      data.spanColor = '';
       Notify({type: 'success', message: '验证码已发送'});
       //开始倒计时
       let time = 120;

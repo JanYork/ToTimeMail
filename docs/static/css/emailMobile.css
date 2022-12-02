@@ -73,3 +73,65 @@
     justify-content: center;
     align-items: center;
 }
+.qq_box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    font-family: "幼圆", serif;
+}
+.qq_box img{
+    width: 10rem;
+    margin-bottom: 2rem;
+}
+.qq_box h2{
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.back_logo{
+    animation-duration: 3s;
+    animation-fill-mode: both;
+    animation-name: fadeIn;
+}
+.time_top_box{
+    animation-duration: 3s;
+    animation-fill-mode: both;
+    animation-name: fadeInUp;
+}
+.time_context_top{
+    animation-duration: 8s;
+    animation-fill-mode: both;
+    animation-name: fadeIn;
+}
+.time_context{
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-name: fadeInUp;
+}
+
+.__code_email{
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-name: fadeIn;
+}
+/* 选择单数 */
+.van-cell:nth-child(odd) {
+    animation-duration: 2.5s;
+    animation-fill-mode: both;
+    animation-name: fadeInLeft;
+}
+/* 选择双数 */
+.van-cell:nth-child(even) {
+    animation-duration: 2.5s;
+    animation-fill-mode: both;
+    animation-name: fadeInRight;
+}
+
+.button_box{
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-name: fadeInUp;
+}

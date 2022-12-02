@@ -424,6 +424,11 @@ algoliasearch@^4.0.0:
     "@algolia/requester-node-http" "4.14.2"
     "@algolia/transporter" "4.14.2"
 
+animate.css@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.npmmirror.com/animate.css/-/animate.css-4.1.1.tgz#614ec5a81131d7e4dc362a58143f7406abd68075"
+  integrity sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==
+
 async-validator@^4.2.5:
   version "4.2.5"
   resolved "https://registry.npmmirror.com/async-validator/-/async-validator-4.2.5.tgz#c96ea3332a521699d0afaaceed510a54656c6339"
